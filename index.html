@@ -1,0 +1,76 @@
+<!doctype html> 
+<head>
+	<title>geocoder</title> 
+	<meta name="description" content="Geocoding service powered by Google Maps" />
+	<meta name="keywords" content="geocode, philadelphia, google maps" />
+	<meta name="author" content="Mike Ball" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+	<script type="text/javascript" src="js/gc.js"></script>	
+    <script type="text/javascript">
+        $(document).ready(function() {
+            GC.init('map');
+        });
+    </script>
+</head>
+<body>
+
+	<div class="sidebar">
+		<header>  
+		    <h1>GeoCoder</h1>
+            <a class="help" class="button" href="#">instructions</a>
+		</header>  
+        <form>
+            <label>Address</label> 
+            <input class="addr" type="text" />
+            <input class="submit" type="submit" />
+        </form>
+        <ul class="geocodes"></ul>
+    </div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+    <!-- 
+		<div id="container">
+		
+			<div id="msg-box">
+				This geocoder will take a set of street addresses, geocode them using Google Map and return standardized addresses and dots on a map. 
+				Follow the steps below.<br><br>
+				1. Clean up your data.<br>
+				2. Data should be in one of the following formats, any other format will return questionable results:<br>
+				<ul>
+					<li>Street Address; City; State; Zip</li>
+					<li>Street Address; City; State; </li>
+					<li>Street Address; Zip </li>
+				</ul>
+				3. Paste your data, one address per line, into the text box titled 'input' and click 'geocode!'.
+			</div>
+			
+			<div id="progress-bar">
+				
+			</div>
+			
+			<div id="form-container">
+				<h2>input</h2>
+				<textarea id="in"></textarea><br><br>
+				<h2>output</h2>
+				<textarea id="out"></textarea>
+			</div>
+			
+			<div id="map-container">
+				<div id="map"></div>
+			</div>
+
+		</div>
+		
+		<footer></footer>
+		
+	</div>
+    -->
+
+</body>
+</html>
