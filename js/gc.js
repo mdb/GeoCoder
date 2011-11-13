@@ -46,7 +46,7 @@ GC = (function ($, options) {
             mapElem = document.getElementById(mapId);
             map = new google.maps.Map(mapElem, options);
             google.maps.event.addListener(map, 'dragstart', function() {
-                infowindow.close();
+                infoWindow.close();
             });
         },
 
