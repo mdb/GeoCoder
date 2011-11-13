@@ -76,7 +76,7 @@ GC = (function ($, options) {
                     'address': value,
                 }, function (results, status) {
                     _self.buildMap(results, status)
-										_self.reportGeoCodes(results[0].formatted_address + ',' + results[0].geometry.location.toUrlValue());
+					_self.reportGeoCodes(results[0].formatted_address + ',' + results[0].geometry.location.toUrlValue());
                 });
             });
         },
@@ -118,7 +118,7 @@ GC = (function ($, options) {
         },
 
         reportGeoCodes: function (geocodedAddr) {
-					$('ul.geocodes').append('<li>' + geocodedAddr + '</li>');
+			$('ul.geocodes').append('<li>' + geocodedAddr + '</li>');
         }
     };
 
