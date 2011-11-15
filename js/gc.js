@@ -84,7 +84,7 @@ GC = (function ($, options) {
         buildMap: function (results, status) {
 
             if (status == google.maps.GeocoderStatus.OK) {
-                console.log(results[0].geometry.location);
+                map.setCenter(results[0].geometry.location);
 
                 _self.addMarker({
                     title: results[0].formatted_address,
