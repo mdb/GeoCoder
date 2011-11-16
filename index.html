@@ -25,15 +25,26 @@
             <a class="help" class="button" href="#">instructions</a>
 		</header>  
         <form>
+            <fieldset>
             <label>Address</label> 
             <input class="addr" type="text" />
-            <input class="submit" type="submit" />
+            <a class="add" href="#">Enter another address</a>
+            </fieldset>
+            <input class="submit" value="Submit" type="submit" />
         </form>
         <ul class="geocodes"></ul>
     </div>
     <div class="map-container">
         <div id="map"></div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('a.add').live('click', function() {
+                var fieldset = $(this).parent('fieldset');
+                fieldset.clone().insertAfter(fieldset);
+            });
+        });
+    </script>
     <!-- 
 		<div id="container">
 		
