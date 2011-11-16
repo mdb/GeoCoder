@@ -7,7 +7,7 @@ GC = (function ($, options) {
         geocoder = new google.maps.Geocoder(),
         infoWindow = new google.maps.InfoWindow(),
         map,
-        markers = [],
+        markers = {},
         config = {
             latlng: new google.maps.LatLng(39.958, -75.163),
             zoom: 14,
@@ -18,14 +18,18 @@ GC = (function ($, options) {
     }
 
     // helpers
-    function deleteMarkers(array) {
+    function deleteMarkers(markers) {
         var i;
 
-        if (array) {
-            for (i=0; i<= array; i++) {
-                array[i].setMap(null);
+        if (markers) {
+            for (i in markers) {
+                if (markers.hasOwnProperty(i)) {
+                    markers[i].setMap(null);
+                }
             }
         }
+
+        markers = {};
     }
 
     // public methods
@@ -54,10 +58,11 @@ GC = (function ($, options) {
             var submitButton = $('input.submit'),
                 addrs;
 
-           submitButton.click(function () {
-               addrs = $('input.addr').val();
+           submitButton.bind('click', function () {
+                $('input.addr').each(function () {
+                    _self.sendGeoCodeRequests($(this).val());
+                });
 
-               _self.sendGeoCodeRequests(addrs)
                return false;
             });
         },
@@ -66,18 +71,20 @@ GC = (function ($, options) {
             deleteMarkers(markers);
         },
 
-        sendGeoCodeRequests: function (addrs) {
-            var addrs = addrs.split(/\r\n|\r|\n/),
-                length = addrs.length;
+        sendGeoCodeRequests: function (addr) {
 
-            $.each(addrs, function (index, value) {
-                console.log('VALUE', value);
-                geocoder.geocode({
-                    'address': value,
-                }, function (results, status) {
-                    _self.buildMap(results, status)
-					_self.reportGeoCodes(results[0].formatted_address + ',' + results[0].geometry.location.toUrlValue());
-                });
+            console.log('VALUE', addr);
+
+            geocoder.geocode({
+                'address': addr,
+            }, function (results, status) {
+
+                // make sure the address isn't already coded
+                if (typeof markers[results[0].formatted_address] !== 'undefined') {
+                    return;
+                }
+                _self.buildMap(results, status)
+                _self.reportGeoCodes(results[0].formatted_address + ',' + results[0].geometry.location.toUrlValue());
             });
         },
 
@@ -105,7 +112,9 @@ GC = (function ($, options) {
                 },
                 marker = new google.maps.Marker(settings);
 
-            markers.push(marker);
+            markers[options.title] = marker;
+            console.log('markers: ', markers);
+            console.log('marker: ', marker);
             _self.addInfoListener(marker);
         },
 
