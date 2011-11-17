@@ -26,9 +26,8 @@
 		</header>  
         <form>
             <fieldset>
-            <label>Address</label> 
-            <input class="addr" type="text" />
-            <a class="add" href="#">Enter another address</a>
+                <input class="addr" type="text" placeholder="Enter an address" />
+                <a class="add" href="#">Enter another address</a>
             </fieldset>
             <input class="submit" value="Submit" type="submit" />
         </form>
@@ -40,8 +39,10 @@
     <script>
         $(document).ready(function() {
             $('a.add').live('click', function() {
-                var fieldset = $(this).parent('fieldset');
-                fieldset.clone().insertAfter(fieldset);
+                var fieldset = $(this).parent('fieldset'),
+                    newFieldset = fieldset.clone();
+                newFieldset.find('input.addr').val('').attr('placeholder', 'Enter another address');
+                newFieldset.insertAfter(fieldset);
             });
         });
     </script>
