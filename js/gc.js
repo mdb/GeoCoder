@@ -79,8 +79,8 @@ GC = (function ($, options) {
                 'address': addr,
             }, function (results, status) {
 
-                // make sure the address isn't already coded
-                if (typeof markers[results[0].formatted_address] !== 'undefined') {
+                // make sure an address exists and that the address isn't already coded
+                if (typeof results[0] === 'undefined' || typeof markers[results[0]] === '' || typeof markers[results[0].formatted_address] !== 'undefined') {
                     return;
                 }
                 _self.buildMap(results, status)
